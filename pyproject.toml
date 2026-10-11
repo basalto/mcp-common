@@ -1,0 +1,69 @@
+[project]
+name = "basalto-mcp"
+version = "0.1.0"
+description = "Shared building blocks for the basalto homelab MCP servers: FastMCP bearer auth, config base, and the standard serve() entry point"
+authors = [
+    { name = "basalto", email = "basalto@gmail.com" },
+]
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+keywords = ["mcp", "fastmcp", "homelab", "auth"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "fastmcp>=3.1.0",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "uvicorn>=0.30.0",
+    "starlette>=0.37.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Repository = "https://github.com/basalto/mcp-common"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/basalto_mcp"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
+ignore = ["E501", "B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
